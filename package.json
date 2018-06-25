@@ -28,7 +28,9 @@
   "scripts": {
     "test": "mocha tests --recursive",
     "lint": "eslint ./",
-    "pretest": "npm run lint"
+    "pretest": "npm run lint",
+    "precommit": "echo 'Pre-commit checks...' && lint-staged",
+    "prepush": "echo 'Pre-push checks...' && npm run pretest"
   },
   "dependencies": {
     "requireindex": "~1.1.0"
@@ -47,6 +49,12 @@
   },
   "engines": {
     "node": ">=4"
+  },
+  "lint-staged": {
+    "private/prj-frontend/src/**/*.{js,json,scss}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "license": "MIT"
 }
