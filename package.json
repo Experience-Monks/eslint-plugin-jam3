@@ -1,0 +1,42 @@
+{
+  "name": "eslint-plugin-jam3",
+  "version": "0.1.0",
+  "description": "Jam3 eslint plugin for react",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "eslint-plugin-jam3"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jam3/eslint-plugin-jam3.git"
+  },
+  "author": "Jam3",
+  "contributors": [
+    {
+      "name": "Donghyuk(Jacob) Jang",
+      "url": "https://github.com/DonghyukJacobJang"
+    }
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha tests --recursive"
+  },
+  "dependencies": {
+    "requireindex": "~1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "~3.9.1",
+    "eslint-config-jam3": "0.1.3",
+    "mocha": "^3.1.2"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jam3/eslint-plugin-jam3/issues"
+  },
+  "homepage": "https://github.com/Jam3/eslint-plugin-jam3#readme"
+}
