@@ -1,15 +1,6 @@
 {
-  "env": {
-    "es6": true,
-    "node": true
-  },
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
   "extends": ["jam3"],
   "rules": {
+    "no-console": "off"
   }
 }
