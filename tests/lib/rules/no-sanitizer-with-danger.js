@@ -32,10 +32,12 @@ const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-sanitizer-with-danger', rule, {
   valid: [
     {
-      code: '<App />;'
+      code: '<App />;',
+      options: [{ wrapperName: ['sanitizer'] }]
     },
     {
-      code: "<App dangerouslySetInnerHTML={{ __html: sanitizer('<p>with sanitizer</p>') }} />;"
+      code: "<App dangerouslySetInnerHTML={{ __html: sanitizer('<p>with sanitizer</p>') }} />;",
+      options: [{ wrapperName: ['sanitizer'] }]
     },
     {
       code: "<div dangerouslySetInnerHTML={{ __html: sanitizer('<p>with sanitizer</p>') }} />;"
@@ -67,6 +69,11 @@ ruleTester.run('no-sanitizer-with-danger', rule, {
     },
     {
       code: "<div dangerouslySetInnerHTML={{ __html: Dompurify.sanitizer('<p>with sanitizer</p>') }} />;",
+      errors: [{ message: 'Use sanitizer in util folder. Create sanitizer util if no exist.' }]
+    },
+    {
+      code: "<div dangerouslySetInnerHTML={{ __html: sanitizer('<p>with sanitizer</p>') }} />;",
+      options: [{ wrapperName: ['xss', 'purify'] }],
       errors: [{ message: 'Use sanitizer in util folder. Create sanitizer util if no exist.' }]
     }
   ]

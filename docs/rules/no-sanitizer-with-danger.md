@@ -24,9 +24,41 @@ Examples of **correct** code for this rule:
 <div dangerouslySetInnerHTML={{ __html: sanitizer("<p>with sanitizer</p>") }} />
 ```
 
-### Options
+## Rule Options
 
-If there are any options, describe them here. Otherwise, delete this section.
+This rule can take one argument to customize the components organisation.
+
+```js
+...
+"jam3/no-sanitizer-with-danger": [<enabled>, { wrapperName: <wrapperName>}]
+...
+```
+
+* `enabled`: for enabling the rule. 0=off, 1=warn, 2=error. Defaults to 0.
+* `wrapperName`: optional array of methods to validate.
+
+The default configuration is:
+
+```js
+{
+  wrapperName: [
+    'sanitizer'
+  ]
+}
+```
+
+You can override this configuration to match your needs.
+
+For example, if you want to allow other key words:
+
+```js
+"jam3/no-sanitizer-with-danger": [2, {
+  wrapperName: [
+    'xss',
+    'purify'
+  ]
+}]
+```
 
 ## Further Reading
 
