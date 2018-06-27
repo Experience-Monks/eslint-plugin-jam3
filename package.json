@@ -7,7 +7,13 @@
     "eslintplugin",
     "eslint-plugin",
     "eslint-plugin-jam3",
-    "eslint-react"
+    "eslint-react",
+    "no-danger",
+    "dangerouslySetInnerHTML",
+    "xss",
+    "filter",
+    "security",
+    "best-practices"
   ],
   "repository": {
     "type": "git",
@@ -22,6 +28,10 @@
     {
       "name": "Donghyuk(Jacob) Jang",
       "url": "https://github.com/DonghyukJacobJang"
+    },
+    {
+      "name": "Iran Reyes",
+      "url": "https://github.com/iranreyes"
     }
   ],
   "main": "lib/index.js",
