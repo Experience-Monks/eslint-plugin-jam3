@@ -30,7 +30,7 @@ ruleTester.run('forbid-methods', rule, {
   valid: [
     {
       code: `
-        class Hello extends Component {
+        class Valid1 extends Component {
           constructor() {}
           componentDidMount() {}
           UNSAFE_componentWillMount() {}
@@ -45,7 +45,7 @@ ruleTester.run('forbid-methods', rule, {
     },
     {
       code: `
-        class Hello extends React.Component {
+        class Valid2 extends React.Component {
           constructor() {}
           componentDidMount() {}
           UNSAFE_componentWillMount() {}
@@ -60,7 +60,7 @@ ruleTester.run('forbid-methods', rule, {
     },
     {
       code: `
-        class Hello extends PureComponent {
+        class Valid3 extends PureComponent {
           constructor() {}
           componentDidMount() {}
           UNSAFE_componentWillMount() {}
@@ -75,7 +75,7 @@ ruleTester.run('forbid-methods', rule, {
     },
     {
       code: `
-        class Hello extends React.PureComponent {
+        class Valid4 extends React.PureComponent {
           constructor() {}
           componentDidMount() {}
           UNSAFE_componentWillMount() {}
@@ -90,7 +90,7 @@ ruleTester.run('forbid-methods', rule, {
     },
     {
       code: `
-        class Hello extends React.PureComponent {
+        class Valid5 extends React.PureComponent {
           constructor() {}
           componentDidMount() {}
           UNSAFE_componentWillMount() {}
@@ -104,13 +104,31 @@ ruleTester.run('forbid-methods', rule, {
         }
       `,
       options: [{ forbiddenMethods: ['componentWillMount', 'componentWillReceiveProps'] }]
+    },
+    {
+      code: `
+        var Valid6 = createReactClass({
+          UNSAFE_componentWillMount: function() {},
+          componentDidMount: function() {},
+          UNSAFE_componentWillReceiveProps: function() {},
+          shouldComponentUpdate: function() {},
+          UNSAFE_componentWillUpdate: function() {},
+          getSnapshotBeforeUpdate: function() {},
+          componentDidUpdate: function() {},
+          componentDidCatch: function() {},
+          componentWillUnmount: function() {},
+          render: function() {
+            return <div>Hello</div>;
+          }
+        });
+      `
     }
   ],
 
   invalid: [
     {
       code: `
-        class Hello extends React.Component {
+        class Invalid1 extends React.Component {
           componentWillMount() {}
           componentWillReceiveProps() {}
           componentWillUpdate() {}
@@ -125,7 +143,7 @@ ruleTester.run('forbid-methods', rule, {
     },
     {
       code: `
-        class Hello extends React.Component {
+        class Invalid2 extends React.Component {
           componentWillMount() {}
           render() {}
         }
@@ -138,7 +156,7 @@ ruleTester.run('forbid-methods', rule, {
     },
     {
       code: `
-        class Hello extends React.Component {
+        class Invalid3 extends React.Component {
           componentWillReceiveProps() {}
           render() {}
         }
@@ -151,7 +169,7 @@ ruleTester.run('forbid-methods', rule, {
     },
     {
       code: `
-        class Hello extends React.Component {
+        class Invalid4 extends React.Component {
           componentWillUpdate() {}
           render() {}
         }
@@ -164,12 +182,36 @@ ruleTester.run('forbid-methods', rule, {
     },
     {
       code: `
-        class Hello extends React.PureComponent {
+        class Invalid5 extends React.PureComponent {
           componentWillMount() {}
           componentWillReceiveProps() {}
           componentWillUpdate() {}
           render() {}
         }
+      `,
+      errors: [
+        {
+          message: 'Component includes forbidden method(s).'
+        }
+      ]
+    },
+    {
+      code: `
+        var Invalid6 = createReactClass({
+          componentWillMount: function() {},
+          UNSAFE_componentWillMount: function() {},
+          componentDidMount: function() {},
+          UNSAFE_componentWillReceiveProps: function() {},
+          shouldComponentUpdate: function() {},
+          UNSAFE_componentWillUpdate: function() {},
+          getSnapshotBeforeUpdate: function() {},
+          componentDidUpdate: function() {},
+          componentDidCatch: function() {},
+          componentWillUnmount: function() {},
+          render: function() {
+            return <div>Hello</div>;
+          }
+        });
       `,
       errors: [
         {
