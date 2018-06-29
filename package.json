@@ -41,6 +41,8 @@
     "pretest": "npm run lint"
   },
   "dependencies": {
+    "doctrine": "^2.1.0",
+    "has": "^1.0.3",
     "requireindex": "~1.1.0"
   },
   "devDependencies": {
