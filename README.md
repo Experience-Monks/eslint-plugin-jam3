@@ -44,6 +44,7 @@ Then configure the rules you want to use under the rules section.
 ## Supported Rules
 
 * [jam3/no-sanitizer-with-danger](docs/rules/no-sanitizer-with-danger.md): Enforces use of xss sanitizer with danger
+* [jam3/forbid-methods](docs/rules/forbid-methods.md): Forbid use of method
 
 ## Useful resources
 
