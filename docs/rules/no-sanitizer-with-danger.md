@@ -26,7 +26,7 @@ Examples of **correct** code for this rule:
 
 ## Rule Options
 
-This rule can take one argument to customize the components organisation.
+This rule can take one argument to customize the components organization.
 
 ```js
 ...
