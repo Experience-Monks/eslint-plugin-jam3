@@ -96,7 +96,6 @@ ruleTester.run('forbid-methods', rule, {
           UNSAFE_componentWillMount() {}
           UNSAFE_componentWillReceiveProps() {}
           shouldComponentUpdate() {}
-          componentWillUpdate() {}
           UNSAFE_componentWillUpdate() {}
           componentDidUpdate() {}
           componentWillUnmount() {}
