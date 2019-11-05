@@ -37,8 +37,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha tests --recursive",
-    "lint": "eslint ./",
-    "pretest": "npm run lint"
+    "test:no-sanitize-window-location": "mocha ./tests/lib/rules/no-sanitize-window-location"
   },
   "dependencies": {
     "doctrine": "^2.1.0",

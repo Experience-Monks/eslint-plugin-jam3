@@ -51,3 +51,4 @@ Then configure the rules you want to use under the rules section.
 * [Eslint developer guide](https://eslint.org/docs/developer-guide/)
 * [Creating an ESLint Plugin](https://medium.com/@btegelund/creating-an-eslint-plugin-87f1cb42767f)
 * [eslint-plugin-react](https://www.npmjs.com/package/eslint-plugin-react)
+* [ast explorer](https://astexplorer.net/)
