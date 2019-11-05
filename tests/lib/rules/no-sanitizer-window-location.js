@@ -9,14 +9,14 @@
 //------------------------------------------------------------------------------
 
 var RuleTester = require('eslint').RuleTester;
-var rule = require('../../../lib/rules/no-sanitize-window-location');
+var rule = require('../../../lib/rules/no-sanitizer-window-location');
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-ruleTester.run('no-sanitize-window-location', rule, {
+ruleTester.run('no-sanitizer-window-location', rule, {
   // valid example codes
   valid: [
     {

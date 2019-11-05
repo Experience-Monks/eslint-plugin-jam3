@@ -37,7 +37,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha tests --recursive",
-    "test:no-sanitize-window-location": "mocha ./tests/lib/rules/no-sanitize-window-location"
+    "test:no-sanitizer-window-location": "mocha ./tests/lib/rules/no-sanitizer-window-location"
   },
   "dependencies": {
     "doctrine": "^2.1.0",
