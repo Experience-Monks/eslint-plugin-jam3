@@ -19,6 +19,7 @@ var ruleTester = new RuleTester();
 ruleTester.run('no-sanitizer-window-location', rule, {
   // valid example codes
   valid: [
+    // assigning
     {
       code: 'window.location = sanitizer("/path#unpurifiedString");'
     },
@@ -36,6 +37,25 @@ ruleTester.run('no-sanitizer-window-location', rule, {
     },
     {
       code: 'window.location.assign(sanitizer(unpurifiedVar));'
+    },
+    // reading
+    {
+      code: 'var windowLocation = sanitizer(window.location);'
+    },
+    {
+      code: 'var windowLocation = sanitizer(window.location.origin);'
+    },
+    {
+      code: 'var windowLocation = sanitizer(window.location.hash);'
+    },
+    {
+      code: 'var windowLocation = sanitizer(window.location.host);'
+    },
+    {
+      code: 'var windowLocation = sanitizer(window.location.hostname);'
+    },
+    {
+      code: 'var windowLocation = sanitizer(window.location.pathname);'
     }
   ],
   // invalid example codes
@@ -87,6 +107,16 @@ ruleTester.run('no-sanitizer-window-location', rule, {
     },
     {
       code: 'window.location.assign(unpurifiedVar);',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    // reading
+    {
+      code: 'var windowLocation = window.location;',
       errors: [
         {
           message: 'File contains violation code(s) of XSS attack',
