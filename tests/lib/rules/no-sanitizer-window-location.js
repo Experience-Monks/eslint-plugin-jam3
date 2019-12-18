@@ -27,7 +27,19 @@ ruleTester.run('no-sanitizer-window-location', rule, {
       code: 'window.location = sanitizer(unpurifiedVar);'
     },
     {
+      code: 'window.location.href = sanitizer(unpurifiedVar);'
+    },
+    {
+      code: 'window.location.pathname = sanitizer(unpurifiedVar);'
+    },
+    {
+      code: 'window.location.search = sanitizer(unpurifiedVar);'
+    },
+    {
       code: 'window.location.hash = sanitizer("unpurifiedString");'
+    },
+    {
+      code: 'window.location.origin = sanitizer("unpurifiedString");'
     },
     {
       code: 'window.location.hash = sanitizer(unpurifiedVar);'
@@ -43,25 +55,34 @@ ruleTester.run('no-sanitizer-window-location', rule, {
       code: 'var windowLocation = sanitizer(window.location);'
     },
     {
-      code: 'var windowLocation = sanitizer(window.location.origin);'
+      code: 'var windowLocationOrigin = sanitizer(window.location.origin);'
     },
     {
-      code: 'var windowLocation = sanitizer(window.location.hash);'
+      code: 'var windowLocationHash = sanitizer(window.location.hash);'
     },
     {
-      code: 'var windowLocation = sanitizer(window.location.host);'
+      code: 'var windowLocationHost = sanitizer(window.location.host);'
     },
     {
-      code: 'var windowLocation = sanitizer(window.location.hostname);'
+      code: 'var windowLocationHostname = sanitizer(window.location.hostname);'
     },
     {
-      code: 'var windowLocation = sanitizer(window.location.pathname);'
+      code: 'var windowLocationPathname = sanitizer(window.location.pathname);'
+    },
+    {
+      code: 'var windowLocationSearch = sanitizer(window.location.search);'
+    },
+    {
+      code: 'var windowLocationOrigin = sanitizer(window.location.origin);'
+    },
+    {
+      code: 'var windowLocationHref = sanitizer(window.location.href);'
     }
   ],
   // invalid example codes
   invalid: [
     {
-      code: 'window.location = "unpurifiedString";',
+      code: 'window.location = "/path#unpurifiedString";',
       errors: [
         {
           message: 'File contains violation code(s) of XSS attack',
@@ -79,7 +100,43 @@ ruleTester.run('no-sanitizer-window-location', rule, {
       ]
     },
     {
+      code: 'window.location.href = unpurifiedVar;',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
+      code: 'window.location.pathname = unpurifiedVar;',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
+      code: 'window.location.search = unpurifiedVar;',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
       code: 'window.location.hash = "unpurifiedString";',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
+      code: 'window.location.origin = "unpurifiedString";',
       errors: [
         {
           message: 'File contains violation code(s) of XSS attack',
@@ -97,7 +154,7 @@ ruleTester.run('no-sanitizer-window-location', rule, {
       ]
     },
     {
-      code: 'window.location.assign("unpurifiedString");',
+      code: 'window.location.assign("/path#unpurifiedString");',
       errors: [
         {
           message: 'File contains violation code(s) of XSS attack',
@@ -117,6 +174,78 @@ ruleTester.run('no-sanitizer-window-location', rule, {
     // reading
     {
       code: 'var windowLocation = window.location;',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
+      code: 'var windowLocationOrigin = window.location.origin;',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
+      code: 'var windowLocationHash = window.location.hash;',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
+      code: 'var windowLocationHost = window.location.host;',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
+      code: 'var windowLocationHostname = window.location.hostname;',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
+      code: 'var windowLocationPathname = window.location.pathname;',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
+      code: 'var windowLocationSearch = window.location.search;',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
+      code: 'var windowLocationOrigin = window.location.origin;',
+      errors: [
+        {
+          message: 'File contains violation code(s) of XSS attack',
+          type: 'Cross Site Scripting (XSS)'
+        }
+      ]
+    },
+    {
+      code: 'var windowLocationHref = window.location.href;',
       errors: [
         {
           message: 'File contains violation code(s) of XSS attack',
