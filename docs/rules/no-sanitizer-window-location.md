@@ -1,4 +1,4 @@
-# Prevent window obejct based XSS attack (no-sanitizer-window-location)
+# Prevent window object based XSS attack (no-sanitizer-window-location)
 
 Please describe the origin of the rule here.
 
