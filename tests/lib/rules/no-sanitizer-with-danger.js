@@ -51,32 +51,40 @@ ruleTester.run('no-sanitizer-with-danger', rule, {
   invalid: [
     {
       code: "<App dangerouslySetInnerHTML={{ __html: '<p>with sanitizer</p>' }} />;",
-      errors: [NO_SANITIZER_PATTERN]
+      errors: [NO_SANITIZER_PATTERN],
+      output: "<App dangerouslySetInnerHTML={{ __html: sanitizer('<p>with sanitizer</p>') }} />;"
     },
     {
       code: "<div dangerouslySetInnerHTML={{ __html: '' }}></div>;",
-      errors: [NO_SANITIZER_PATTERN]
+      errors: [NO_SANITIZER_PATTERN],
+      output: "<div dangerouslySetInnerHTML={{ __html: sanitizer('') }}></div>;"
     },
     {
       code: "<div dangerouslySetInnerHTML={{ __html: '<p>with sanitizer</p>' }} />;",
-      errors: [NO_SANITIZER_PATTERN]
+      errors: [NO_SANITIZER_PATTERN],
+      output: "<div dangerouslySetInnerHTML={{ __html: sanitizer('<p>with sanitizer</p>') }} />;"
     },
     {
       code: '<div dangerouslySetInnerHTML={{ __html: title }} />;',
-      errors: [NO_SANITIZER_PATTERN]
+      errors: [NO_SANITIZER_PATTERN],
+      output: '<div dangerouslySetInnerHTML={{ __html: sanitizer(title) }} />;'
     },
     {
       code: "<div dangerouslySetInnerHTML={{ __html: invalidSanitizer('<p>with sanitizer</p>') }} />;",
-      errors: [BAD_WRAPPER_PATTERN]
+      errors: [BAD_WRAPPER_PATTERN],
+      output: "<div dangerouslySetInnerHTML={{ __html: sanitizer(invalidSanitizer('<p>with sanitizer</p>')) }} />;"
     },
     {
       code: "<div dangerouslySetInnerHTML={{ __html: Dompurify.sanitizer('<p>with sanitizer</p>') }} />;",
-      errors: [{ message: XSS_LIBRARY_MESSAGE }]
+      errors: [{ message: XSS_LIBRARY_MESSAGE }],
+      // do not handle direct use of library
+      output: "<div dangerouslySetInnerHTML={{ __html: Dompurify.sanitizer('<p>with sanitizer</p>') }} />;"
     },
     {
       code: "<div dangerouslySetInnerHTML={{ __html: sanitize('<p>with sanitizer</p>') }} />;",
       options: [{ wrapperName: ['xss', 'purify'] }],
-      errors: [BAD_WRAPPER_PATTERN]
+      errors: [BAD_WRAPPER_PATTERN],
+      output: "<div dangerouslySetInnerHTML={{ __html: xss(sanitize('<p>with sanitizer</p>')) }} />;"
     }
   ]
 });
