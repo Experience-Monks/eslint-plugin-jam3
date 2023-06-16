@@ -7,7 +7,9 @@
 // ------------------------------------------------------------------------------
 // Constants
 // ------------------------------------------------------------------------------
-const MESSAGE = 'Use xss sanitizer with dangerouslySetInnerHTML';
+const NO_SANITIZER_PATTERN = /Dangerous property '\s+' without sanitizer found./;
+const BAD_WRAPPER_PATTERN = /Wrapper name is not one of '\[.*\]'\./;
+const XSS_LIBRARY_MESSAGE = 'Direct use of xss library found.';
 
 // ------------------------------------------------------------------------------
 // Requirements
@@ -49,32 +51,32 @@ ruleTester.run('no-sanitizer-with-danger', rule, {
   invalid: [
     {
       code: "<App dangerouslySetInnerHTML={{ __html: '<p>with sanitizer</p>' }} />;",
-      errors: [{ message: MESSAGE }]
+      errors: [NO_SANITIZER_PATTERN]
     },
     {
       code: "<div dangerouslySetInnerHTML={{ __html: '' }}></div>;",
-      errors: [{ message: MESSAGE }]
+      errors: [NO_SANITIZER_PATTERN]
     },
     {
       code: "<div dangerouslySetInnerHTML={{ __html: '<p>with sanitizer</p>' }} />;",
-      errors: [{ message: MESSAGE }]
+      errors: [NO_SANITIZER_PATTERN]
     },
     {
       code: '<div dangerouslySetInnerHTML={{ __html: title }} />;',
-      errors: [{ message: MESSAGE }]
+      errors: [NO_SANITIZER_PATTERN]
     },
     {
-      code: "<div dangerouslySetInnerHTML={{ __html: sanitize('<p>with sanitizer</p>') }} />;",
-      errors: [{ message: 'Use sanitizer as name of wrapper' }]
+      code: "<div dangerouslySetInnerHTML={{ __html: invalidSanitizer('<p>with sanitizer</p>') }} />;",
+      errors: [BAD_WRAPPER_PATTERN]
     },
     {
       code: "<div dangerouslySetInnerHTML={{ __html: Dompurify.sanitizer('<p>with sanitizer</p>') }} />;",
-      errors: [{ message: 'Use sanitizer in util folder. Create sanitizer util if no exist.' }]
+      errors: [{ message: XSS_LIBRARY_MESSAGE }]
     },
     {
-      code: "<div dangerouslySetInnerHTML={{ __html: sanitizer('<p>with sanitizer</p>') }} />;",
+      code: "<div dangerouslySetInnerHTML={{ __html: sanitize('<p>with sanitizer</p>') }} />;",
       options: [{ wrapperName: ['xss', 'purify'] }],
-      errors: [{ message: 'Use sanitizer in util folder. Create sanitizer util if no exist.' }]
+      errors: [BAD_WRAPPER_PATTERN]
     }
   ]
 });
